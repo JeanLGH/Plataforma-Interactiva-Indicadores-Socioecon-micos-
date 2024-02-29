@@ -11,9 +11,7 @@ import { faHouseUser, faUsers, faBuilding } from '@fortawesome/free-solid-svg-ic
 const Demografia = () => {
     const navigate = useNavigate();
 
-    const handleClick = (path) => {
-        navigate(path);
-    }
+    
 
     const column1Styles = {
         backgroundColor: '#138A92',

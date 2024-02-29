@@ -2,28 +2,27 @@ import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { } from '@fortawesome/free-regular-svg-icons'
-import { faHouseUser, faUsers, faClipboard, faEnvelope, faMap, faX } from '@fortawesome/free-solid-svg-icons'
+import { faHouseUser, faUsers } from '@fortawesome/free-solid-svg-icons'
 
 const cardTexts = [
   {
     img: <FontAwesomeIcon icon={faHouseUser} style={{ transform: 'scale(2)' }} />,
     title: '8.023',
     description: 'Densidad Urbana (km2)',
-    bg: 'bg-danger', 
+    bg: 'bg-danger',
   },
   {
     img: <FontAwesomeIcon icon={faUsers} style={{ transform: 'scale(2)' }} />,
     title: '281.029',
     description: 'Total de Habitantes ',
-    bg: 'bg-warning', 
+    bg: 'bg-warning',
   },
   {
     img: <FontAwesomeIcon icon={faHouseUser} style={{ transform: 'scale(2)' }} />,
     title: '8.023',
     description: 'Densidad Urbana (km2)',
-    bg: 'bg-primary', 
+    bg: 'bg-primary',
   },
 ];
 

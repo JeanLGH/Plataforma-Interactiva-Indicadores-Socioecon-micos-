@@ -2,11 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-
-import Image from 'react-bootstrap/Image';
 import NavBar from '../components/NavBar';
-import CardsGrid from '../components/CardsGrid';
-import Graphic from '../components/Graphic';
 import Sidebar from "../components/Sidebar";
 
 const AccessibilitySection = () => {
