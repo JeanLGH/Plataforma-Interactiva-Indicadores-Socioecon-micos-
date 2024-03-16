@@ -12,6 +12,10 @@ import Salud from "./pages/health";
 import Security from "./pages/security";
 import Information from "./pages/information";
 import Accessibility from './pages/accessibility';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import "./styles/flexboxgrid.min.css";
+import './styles/index.css';
 
 
 import reportWebVitals from './reportWebVitals';
