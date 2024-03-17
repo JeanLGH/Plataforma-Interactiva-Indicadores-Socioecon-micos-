@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import CarouselPhotos from "../Elements/CarouselPhotos";
 // Components
 import ProjectBox from "../Elements/ProjectBox";
 import FullButton from "../Buttons/FullButton";
-// Assets
-import AddImage2 from "../../assets/img/add/add2.png";
+
 
 export default function Projects() {
   return (
@@ -86,27 +86,16 @@ export default function Projects() {
           <Advertising className="flexSpaceCenter">
             <AddLeft>
               <AddLeftInner>
-                <ImgWrapper className="flexCenter">
-                  <img className="radius8" src={AddImage2} alt="add" />
-                </ImgWrapper>
+                
+                  <CarouselPhotos />
               </AddLeftInner>
             </AddLeft>
 
             <AddRight>
-              <h4 className="font15 semiBold">A few words about company</h4>
-              <h2 className="font40 extraBold">A Study of Creativity</h2>
+              <h2 className="font40 extraBold">Destacados</h2>
               <p className="font12">
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed
-                diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+              Informes, eventos, estadísticas, encuestas y documentos con información de cada uno de los once municipios de Sabana Centro que pueden ser de tu interés
               </p>
-              <ButtonsRow className="flexNullCenter" style={{ margin: "30px 0" }}>
-                <div style={{ width: "190px" }}>
-                  <FullButton title="Get Started" action={() => alert("clicked")} />
-                </div>
-                <div style={{ width: "190px", marginLeft: "15px" }}>
-                  <FullButton title="Contact Us" action={() => alert("clicked")} border />
-                </div>
-              </ButtonsRow>
             </AddRight>
           </Advertising>
         </div>
@@ -119,7 +108,7 @@ const Wrapper = styled.section`
   width: 100%;
 `;
 const HeaderInfo = styled.div`
-  margin-bottom: 50px; // Ajusta este valor según sea necesario para el espacio deseado
+  margin-bottom: 50px;
   @media (max-width: 860px) {
     text-align: center;
   }
@@ -138,11 +127,7 @@ const Advertising = styled.div`
     margin: 80px 0 0px 0;
   }
 `;
-const ButtonsRow = styled.div`
-  @media (max-width: 860px) {
-    justify-content: space-between;
-  }
-`;
+
 const AddLeft = styled.div`
   position: relative;
   width: 50%;
@@ -170,31 +155,11 @@ const AddRight = styled.div`
   }
 `;
 const AddLeftInner = styled.div`
-  width: 100%;
-  position: absolute;
-  top: -300px;
-  left: 0;
-  @media (max-width: 1190px) {
-    top: -250px;
-  }
-  @media (max-width: 920px) {
-    top: -200px;
-  }
+  width: 50%; 
+  margin-right: 20px; 
   @media (max-width: 860px) {
-    order: 1;
-    position: relative;
-    top: -60px;
-    left: 0;
+    width: 100%; 
+    margin-right: 0; 
   }
 `;
-const ImgWrapper = styled.div`
-  width: 100%;
-  padding: 0 15%;
-  img {
-    width: 100%;
-    height: auto;
-  }
-  @media (max-width: 400px) {
-    padding: 0;
-  }
-`;
+

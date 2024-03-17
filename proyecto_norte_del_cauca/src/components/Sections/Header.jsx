@@ -3,8 +3,7 @@ import styled from "styled-components";
 // Components
 import FullButton from "../Buttons/FullButton";
 // Assets
-import HeaderImage from "../../assets/img/header-img.png";
-import QuotesIcon from "../../assets/svg/Quotes";
+
 import Dots from "../../assets/svg/Dots";
 import InteractiveChart from "../Elements/InteractiveChart";
 
@@ -14,12 +13,12 @@ export default function Header() {
     <Wrapper id="home" className="container flexSpaceCenter">
       <LeftSide className="flexCenter">
         <div>
-          <h1 className="extraBold font60">Norte del Cauca  <span style={{ color: "#0E77C8" }}>Como</span> Vamos!</h1>
+          <h1 className="extraBold font60">Norte del Cauca  <span style={{ color: "#0E77C8" }}>Cómo</span> Vamos!</h1>
           <HeaderP className="font13 semiBold">
             Norte del Cauca Cómo Vamos te abre las puertas a un mundo de información estadística sobre la calidad de vida en los municipios de Santander de Quilichao, Puerto Tejada y Guachené.
           </HeaderP>
           <BtnWrapper>
-            <FullButton title="Empecemos!" />
+            <FullButton title="EMPECEMOS!" />
           </BtnWrapper>
         </div>
       </LeftSide>
@@ -107,31 +106,8 @@ const ImageWrapper = styled.div`
     justify-content: center;
   }
 `;
-const Img = styled.img`
-  @media (max-width: 560px) {
-    width: 80%;
-    height: auto;
-  }
-`;
-const QuoteWrapper = styled.div`
-  position: absolute;
-  left: 0;
-  bottom: 50px;
-  max-width: 330px;
-  padding: 30px;
-  z-index: 99;
-  @media (max-width: 960px) {
-    left: 20px;
-  }
-  @media (max-width: 560px) {
-    bottom: -50px;
-  }
-`;
-const QuotesWrapper = styled.div`
-  position: absolute;
-  left: -20px;
-  top: -10px;
-`;
+
+
 const DotsWrapper = styled.div`
   position: absolute;
   right: -100px;

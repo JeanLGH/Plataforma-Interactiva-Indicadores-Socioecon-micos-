@@ -1,17 +1,46 @@
 import React from "react";
 import styled from "styled-components";
 // Assets
-import QuoteIcon from "../../assets/svg/Quotes";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { 
+  faHeart, 
+  faUserFriends, 
+  faBook, 
+  faHandshake, 
+  faTree, 
+  faMoneyBillAlt 
+} from '@fortawesome/free-solid-svg-icons';
 
-export default function TestimonialBox({ text, author }) {
+export default function TestimonialBox({ topic, author }) {
+  let icon;
+  switch (topic) {
+    case "Salud":
+      icon = faHeart;
+      break;
+    case "Demografía":
+      icon = faUserFriends;
+      break;
+    case "Educación":
+      icon = faBook;
+      break;
+    case "Seguridad":
+      icon = faHandshake;
+      break;
+    case "Medio Ambiente":
+      icon = faTree;
+      break;
+    case "Finanzas":
+      icon = faMoneyBillAlt;
+      break;
+    default:
+      icon = faHeart;
+  }
+
   return (
     <Wrapper className="darkBg radius8 flexNullCenter flexColumn">
       <QuoteWrapper>
-        <QuoteIcon />
+        <FontAwesomeIcon icon={icon} size="3x" color="#ffffff" />
       </QuoteWrapper>
-      <p className="whiteColor font13" style={{ paddingBottom: "30px" }}>
-        {text}
-      </p>
       <p className="orangeColor font13" style={{alignSelf: 'flex-end'}}>
         <em>{author}</em>
       </p>
@@ -23,8 +52,13 @@ const Wrapper = styled.div`
   width: 100%;
   padding: 20px 30px;
   margin-top: 30px;
+  transition: transform 0.3s ease;
+  background-color: #3D009F;
+  &:hover {
+    transform: translateY(-5px);
+  }
 `;
 const QuoteWrapper = styled.div`
   position: relative;
-  top: -40px;
+  top: 0px;
 `;
