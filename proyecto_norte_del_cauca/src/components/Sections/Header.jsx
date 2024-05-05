@@ -6,7 +6,6 @@ import FullButton from "../Buttons/FullButton";
 
 import Dots from "../../assets/svg/Dots";
 import InteractiveChart from "../Elements/InteractiveChart";
-import { Link } from 'react-router-dom';
 
 
 export default function Header() {

@@ -118657,7 +118657,7 @@ export const statesData =
         },
         "id": "e5540b67-f9dc-49ba-a58b-69a5b3c8fa89",
         "properties": {
-          "text": "López"
+          "text": "López De Micay"
         }
       },
       {

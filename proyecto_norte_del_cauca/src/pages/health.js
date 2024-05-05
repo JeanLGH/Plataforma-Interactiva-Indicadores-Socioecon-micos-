@@ -12,7 +12,6 @@ import { faSkullCrossbones } from '@fortawesome/free-solid-svg-icons';
 
 const Salud = () => {
     const [totalPoblacion, setTotalPoblacion] = useState(null); // Estado para almacenar el total de población
-    const [error, setError] = useState(null); // Estado para almacenar el error
 
     useEffect(() => {
         const fetchTotalPoblacion = async () => {
@@ -27,7 +26,7 @@ const Salud = () => {
               console.log(totalPoblacion)
             } catch (error) {
               console.error('Error al obtener el total de población:', error);
-              setError(error.message);
+             
             }
           };
         fetchTotalPoblacion();
