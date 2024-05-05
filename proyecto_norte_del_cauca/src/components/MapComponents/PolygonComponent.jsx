@@ -6,8 +6,8 @@ const PolygonComponent = ({ state, mousePosition, setMousePosition }) => {
   const coordinates = state.geometry.coordinates[0].map((item) => [item[1], item[0]]);
   const stateName = state.properties.text;
   const statePersonas = state.properties.personas;
-  const [totalPoblacion, setTotalPoblacion] = useState(null); // Estado para almacenar el total de población
-  const [maxPoblacion, setMaxPoblacion] = useState(0); // Estado para almacenar el valor máximo de población
+  const [totalPoblacion, setTotalPoblacion] = useState(null); 
+  const [maxPoblacion, setMaxPoblacion] = useState(0); 
 
   useEffect(() => {
     const fetchTotalPoblacion = async () => {
