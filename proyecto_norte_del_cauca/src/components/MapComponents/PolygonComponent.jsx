@@ -31,7 +31,6 @@ const PolygonComponent = ({ state, mousePosition, setMousePosition }) => {
   const mapPolygonColorToDensity = (density) => {
     // Calcular el porcentaje de población con respecto al máximo
     const percentage = (density / maxPoblacion) * 100;
-    console.log(percentage);
     // Asignar el color en función del porcentaje
     return percentage > 80
       ? '#97060C'

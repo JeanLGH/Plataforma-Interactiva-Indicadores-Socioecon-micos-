@@ -21,9 +21,7 @@ const Salud = () => {
                 throw new Error('Error al obtener los datos del servidor');
               }
               const data = await response.json();
-              console.log(data);
               setTotalPoblacion(data);
-              console.log(totalPoblacion)
             } catch (error) {
               console.error('Error al obtener el total de población:', error);
              

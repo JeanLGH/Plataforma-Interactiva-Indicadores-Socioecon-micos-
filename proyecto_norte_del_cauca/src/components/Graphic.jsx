@@ -4,8 +4,6 @@ import { PieChart, Pie, Legend as PieLegend, Cell, Tooltip as PieTooltip } from 
 import { Navbar, Nav } from 'react-bootstrap';
 
 const Graphic = ({ totalPoblacion }) => {
-    console.log(totalPoblacion);
-
     const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AD40AF'];
 
     const [chartType, setChartType] = useState('bar');
