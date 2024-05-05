@@ -1,7 +1,7 @@
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MapComponent from '../components/MapComponents/MapComponent';
 import NavBar from '../components/Nav/TopNavbar';
 import CardsGrid from '../components/CardsGrid';
@@ -11,6 +11,28 @@ import { faSkullCrossbones } from '@fortawesome/free-solid-svg-icons';
 
 
 const Salud = () => {
+    const [totalPoblacion, setTotalPoblacion] = useState(null); // Estado para almacenar el total de población
+    const [error, setError] = useState(null); // Estado para almacenar el error
+
+    useEffect(() => {
+        const fetchTotalPoblacion = async () => {
+            try {
+              const response = await fetch('http://localhost:3001/datos2022Poblacion');
+              if (!response.ok) {
+                throw new Error('Error al obtener los datos del servidor');
+              }
+              const data = await response.json();
+              console.log(data);
+              setTotalPoblacion(data);
+              console.log(totalPoblacion)
+            } catch (error) {
+              console.error('Error al obtener el total de población:', error);
+              setError(error.message);
+            }
+          };
+        fetchTotalPoblacion();
+    }, []);
+
 
     const center = [2.283333, -76.85];
     const [mousePosition, setMousePosition] = useState(null);
@@ -69,7 +91,8 @@ const Salud = () => {
                     </Row>
                     <Row>
                         Gráfica
-                        <Graphic />
+                        <Graphic totalPoblacion={totalPoblacion} />
+                       
                     </Row>
                 </Col>
             </Row>
