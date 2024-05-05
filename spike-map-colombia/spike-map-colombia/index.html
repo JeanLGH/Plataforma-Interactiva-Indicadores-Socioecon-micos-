@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spike Map Colombia</title>
+    <link rel="stylesheet" type="text/css" href="./styles.css">
+    <link rel="stylesheet" type="text/css" href="./inspector.css">
+</head>
+
+<body>
+
+    <button id="botonCambio">Mostrar todo el mapa de Colombia</button>
+
+    <div id="container">
+        <div id="search-container">
+            <input type="text" id="search" placeholder="Buscar municipio...">
+
+            <div id="dropdown-container">
+                <!-- Dropdown se genera dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+    <div id="poblacion"></div>
+
+    <!-- Elemento para mostrar el mapa -->
+    <div id="map-container"></div>
+
+    <script type="module">
+        import define from "./index.js";
+        import { Runtime, Library, Inspector } from "./runtime.js";
+
+        const runtime = new Runtime();
+        const main = runtime.module(define, Inspector.into(document.getElementById('map-container')));
+    </script>
+</body>
+
+</html>

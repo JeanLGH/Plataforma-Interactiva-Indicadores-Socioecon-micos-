@@ -6,6 +6,7 @@ import FullButton from "../Buttons/FullButton";
 
 import Dots from "../../assets/svg/Dots";
 import InteractiveChart from "../Elements/InteractiveChart";
+import { Link } from 'react-router-dom';
 
 
 export default function Header() {
@@ -18,7 +19,7 @@ export default function Header() {
             Norte del Cauca Cómo Vamos te abre las puertas a un mundo de información estadística sobre la calidad de vida en los municipios de Santander de Quilichao, Puerto Tejada y Guachené.
           </HeaderP>
           <BtnWrapper>
-            <FullButton title="EMPECEMOS!" />
+          <FullButton title="EMPECEMOS!" to="/demography" />
           </BtnWrapper>
         </div>
       </LeftSide>

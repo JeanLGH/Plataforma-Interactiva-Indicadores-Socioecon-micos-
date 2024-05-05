@@ -3,7 +3,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import '../styles/style.css';
-import NavBar from '../components/NavBar';
+import NavBar from '../components/Nav/TopNavbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTwitter, faGoogle, faGithub } from '@fortawesome/free-brands-svg-icons';
 import { Form } from 'react-bootstrap';

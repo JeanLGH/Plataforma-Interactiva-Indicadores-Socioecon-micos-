@@ -1,0 +1,29 @@
+.custom-popup .leaflet-popup-content-wrapper {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    padding: 10px;
+  }
+  
+  .custom-popup .leaflet-popup-content {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #333;
+    background-color: #f0f8ff; /* Agrega un color de fondo suave */
+    padding: 10px; /* Agrega un pequeño espacio interno */
+  }
+  
+  .custom-popup .leaflet-popup-tip-container {
+    display: none; /* Oculta la punta del popup */
+  }
+
+  .custom-popup .popup-header {
+    background-color: #87cefa; /* Color de fondo para el encabezado */
+    color: white; /* Color del texto para el encabezado */
+    padding: 5px 10px;
+    border-radius: 5px 5px 0 0;
+    margin-bottom: 10px;
+  }
+
+
+  

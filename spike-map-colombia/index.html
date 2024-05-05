@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spike Map Colombia</title>
+    <link rel="stylesheet" type="text/css" href="./styles.css">
+    <link rel="stylesheet" type="text/css" href="./inspector.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-ZQ5SZwZMhSIoQ5DL/zMzL5e2UG/H5usEV5YrG/YOFk1RrxwZDkMnEYUjwcxqb6N4n89OzNJEqHUl+geODQlK+A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+</head>
+
+<body>
+
+    <button id="botonCambio">Mostrar todo el mapa de Colombia</button>
+
+    <div id="container">
+        <input type="text" id="municipio-input" placeholder="Buscar municipio...">
+
+    </div>
+
+    <div id="poblacion"></div>
+
+    <!-- Elemento para mostrar el mapa -->
+    <div id="map-container"></div>
+
+    <script type="module">
+        import define from "./index.js";
+        import { Runtime, Inspector } from "./runtime.js";
+
+        const runtime = new Runtime();
+        const main = runtime.module(define, Inspector.into(document.getElementById('map-container')));
+    </script>
+</body>
+
+</html>

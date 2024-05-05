@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import NavBar from '../components/NavBar';
+import NavBar from '../components/Nav/TopNavbar';
 import Sidebar from "../components/Sidebar";
 
 const AccessibilitySection = () => {
@@ -19,7 +19,7 @@ const AccessibilitySection = () => {
 };
 
 const column2Styles = {
-    marginRight: '10px', // Espacio entre las columnas
+    marginRight: '10px', 
 };
   useEffect(() => {
     applyStyles();
@@ -124,11 +124,12 @@ const column2Styles = {
   return (
     <>
       <NavBar />
-      <Row>
+    
+      <Row style={{ marginTop: '70px' }}> 
         <Col sm={2} style={column1Styles}>
           <Sidebar />
         </Col>
-        <Col sm={9} className="column-2" style={column2Styles}> {/* Añade la clase column-2 y el estilo de margen */}
+        <Col sm={9} className="column-2" style={column2Styles}> 
           <div className="container mt-5">
             <div className="row">
               <div className="col-lg-12 d-flex justify-content-between align-items-center">

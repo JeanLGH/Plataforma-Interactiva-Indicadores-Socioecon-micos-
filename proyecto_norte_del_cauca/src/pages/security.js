@@ -3,7 +3,7 @@ import Button  from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import NavBar from '../components/NavBar';
+import NavBar from '../components/Nav/TopNavbar';
 import Sidebar from "../components/Sidebar";
 
 const SecuritySection = () => {
@@ -18,11 +18,12 @@ const SecuritySection = () => {
 
     return (
         <>
-            <NavBar />
-            <Row>
-                <Col sm={2} style={column1Styles}>
-                    <Sidebar />
-                </Col>
+        <NavBar />
+      
+        <Row style={{ marginTop: '70px' }}> {/* Agrega marginTop aquí */}
+          <Col sm={2} style={column1Styles}>
+            <Sidebar />
+          </Col>
                 <Col sm={9} className="column-2" style={column2Styles}> {/* Añade la clase column-2 y el estilo de margen */}
                     <div className="container mt-5">
                         <div className="row">

@@ -1,75 +1,116 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import SimpleBar from 'simplebar-react';
+import { useLocation } from "react-router-dom";
+import { CSSTransition } from 'react-transition-group';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChartPie, faBook, faUserFriends, faHouse, faTree, faMoneyBillAlt, faHeart, faHandshake, faGear, faUniversalAccess, faShieldHalved, faCircleUser, faChartSimple } from "@fortawesome/free-solid-svg-icons";
+import { Nav, Badge, Image, Button, Accordion, Navbar } from '@themesberg/react-bootstrap';
 import { Link } from 'react-router-dom';
-import { SidebarData } from './Sidebardata';
-import SubMenu from './Submenu';
-import { IconContext } from 'react-icons/lib';
+import styled from "styled-components"; // Importa styled-components
 
-const Nav = styled.div`
-  background: red;
-  height: 80px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-`;
+export default () => {
+  const location = useLocation();
+  const { pathname } = location;
+  const [show, setShow] = useState(false);
+  const showClass = show ? "show" : "";
 
-const NavIcon = styled(Link)`
-  margin-left: 2rem;
-  font-size: 1.5rem;
-  height: 80px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-`;
+  const onCollapse = () => setShow(!show);
 
-const SidebarNav = styled.nav`
-  background: #138A92;
-  width: 250px;
-  max-height: calc(100vh - 80px);
-  overflow-y: auto;
-  position: relative;
-  @media screen and (max-width: 768px) {
-    width: ${({ sidebar }) => (sidebar ? '250px' : '0')};
-  }
-`;
+  const CollapsableNavItem = (props) => {
+    const { eventKey, title, icon, children = null } = props;
+    const defaultKey = pathname.indexOf(eventKey) !== -1 ? eventKey : "";
 
-const SidebarWrap = styled.div`
-  width: 100%;
-`;
+    return (
+      <Accordion as={Nav.Item} defaultActiveKey={defaultKey}>
+        <Accordion.Item eventKey={eventKey} style={{ border: 'none' }}>
+          <Accordion.Button as={Nav.Link} className="d-flex justify-content-between align-items-center" style={{ backgroundColor: '#138A92', color: 'white', border: 'none' }}>
+            <span>
+              <span className="sidebar-icon"><FontAwesomeIcon icon={icon} /></span>
+              <SidebarText className="sidebar-text">{title}</SidebarText> {/* Agrega el estilo de texto aquí */}
+            </span>
+          </Accordion.Button>
+          <Accordion.Body className="multi-level" style={{ backgroundColor: '#414757' }}>
+            <Nav className="flex-column">
+              {children}
+            </Nav>
+          </Accordion.Body>
+        </Accordion.Item>
+      </Accordion>
+    );
+  };
 
-const FixedSidebar = styled.div`
-  position: fixed;
-  top: 80px;
-  left: ${({ sidebar }) => (sidebar ? '0' : '-100%')};
-  transition: 350ms;
-  z-index: 10;
-  @media screen and (max-width: 768px) {
-    left: ${({ sidebar }) => (sidebar ? '0' : '-250px')};
-  }
-`;
+  const NavItem = (props) => {
+    const { title, link, external, target, icon, image, badgeText, badgeBg = "secondary", badgeColor = "primary" } = props;
+    const classNames = badgeText ? "d-flex justify-content-start align-items-center justify-content-between" : "";
+    const navItemClassName = link === pathname ? "active" : "";
+    const linkProps = external ? { href: link } : { as: Link, to: link };
 
-const Sidebar = () => {
-  const [sidebar, setSidebar] = useState(true);
+    return (
+      <Nav.Item className={navItemClassName} onClick={() => setShow(false)}>
+        <Nav.Link {...linkProps} target={target} className={classNames} style={{ color: 'white' }}>
+          <span>
+            {icon ? <span className="sidebar-icon"><FontAwesomeIcon icon={icon} /> </span> : null}
+            {image ? <Image src={image} width={20} height={20} className="sidebar-icon svg-icon" /> : null}
 
-  const showSidebar = () => setSidebar(!sidebar);
+            <SidebarText className="sidebar-text">{title}</SidebarText> {/* Agrega el estilo de texto aquí */}
+          </span>
+          {badgeText ? (
+            <Badge pill bg={badgeBg} text={badgeColor} className="badge-md notification-count ms-2">{badgeText}</Badge>
+          ) : null}
+        </Nav.Link>
+      </Nav.Item>
+    );
+  };
 
   return (
     <>
-      <IconContext.Provider value={{ color: '#EFF2F4' }}>
-        <SidebarNav sidebar={sidebar}>
-          <FixedSidebar sidebar={sidebar}>
-            <SidebarWrap>
-              <NavIcon to='#'>
-              </NavIcon>
-              {SidebarData.map((item, index) => {
-                return <SubMenu item={item} key={index} />;
-              })}
-            </SidebarWrap>
-          </FixedSidebar>
-        </SidebarNav>
-      </IconContext.Provider>
+      <Navbar expand="md" collapseOnSelect variant="dark" className="navbar-theme-primary px-4 d-md-none">
+        <Navbar.Brand className="me-lg-5">
+          <Image className="navbar-brand-light" />
+        </Navbar.Brand>
+        <Navbar.Toggle as={Button} aria-controls="main-navbar" onClick={onCollapse}>
+          <span className="navbar-toggler-icon" />
+        </Navbar.Toggle>
+        <Navbar.Collapse className="justify-content-end">
+          <Nav.Item className="d-md-none">
+            <Nav.Link className="collapse-close d-md-none" onClick={onCollapse} />
+          </Nav.Item>
+        </Navbar.Collapse>
+      </Navbar>
+      <CSSTransition timeout={300} in={show} classNames="sidebar-transition">
+        <SimpleBar className={`collapse ${showClass} sidebar d-md-block`} style={{ backgroundColor: '#138A92', color: 'white' }}>
+          <div className="sidebar-inner px-4 pt-3">
+            <div className="user-card d-flex d-md-none align-items-center justify-content-between justify-content-md-center pb-4">
+
+              <Nav.Link className="collapse-close d-md-none" onClick={onCollapse}>
+
+              </Nav.Link>
+            </div>
+            <Nav className="flex-column pt-3 pt-md-0 custom-text-white" style={{ width: '100%' }}> {/* Ajusta el ancho del contenido al 100% del Sidebar */}
+              <NavItem title="Inicio" icon={faHouse} link="/" />
+              <NavItem title="Gráficas" icon={faChartPie} link="/graficas" />
+              <CollapsableNavItem eventKey="documentation/" title="Indicadores" icon={faChartSimple}>
+                <NavItem title="Demografía" icon={faUserFriends} link="/demography" />
+                <NavItem title="Salud" icon={faHeart} link="/health" />
+                <NavItem title="Educación" icon={faBook} link="/educacion" />
+                <NavItem title="Seguridad" icon={faHandshake} link="/seguridad" />
+                <NavItem title="Medio Ambiente" icon={faTree} link="/medio-ambiente" />
+                <NavItem title="Finanzas Municipales" icon={faMoneyBillAlt} link="/finanzas-municipales" />
+              </CollapsableNavItem>
+              <CollapsableNavItem eventKey="components/" title="Configuración" icon={faGear}>
+                <NavItem title="Usuario" icon={faCircleUser} link="/information" />
+                <NavItem title="Seguridad" icon={faShieldHalved} link="/security" />
+                <NavItem title="Accesibilidad" icon={faUniversalAccess} link="/accessibility" />
+              </CollapsableNavItem>
+            </Nav>
+          </div>
+        </SimpleBar>
+      </CSSTransition>
     </>
   );
 };
 
-export default Sidebar;
+// Agrega un componente de estilo para el texto de la barra lateral
+const SidebarText = styled.span`
+  font-size: 12px; // Tamaño de fuente más pequeño
+`;

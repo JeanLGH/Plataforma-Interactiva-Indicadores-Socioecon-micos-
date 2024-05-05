@@ -5,13 +5,13 @@ import App from './App';
 import Register from "./pages/register";
 import Login from "./pages/login";
 import Demografia from "./pages/demography";
-import Team from "./pages/team";
-import Overview from "./pages/overview";
-import { Reports, ReportsOne, ReportsTwo, ReportsThree } from "./pages/reports";
+
+
 import Salud from "./pages/health";
 import Security from "./pages/security";
 import Information from "./pages/information";
 import Accessibility from './pages/accessibility';
+import Admin from './pages/adminDashboard';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./styles/flexboxgrid.min.css";
@@ -43,29 +43,10 @@ const router = createBrowserRouter([
     path: "demography",
     element: <Demografia />,
   },
-  {
-    path: "team",
-    element: <Team />,
-  },
-  {
-    path: "overview",
-    element: <Overview />,
-  },
-  {
-    path: "reports",
-    element: <Reports />,
-  },
+
   {
     path: "health",
     element: <Salud />,
-  },
-  {
-    path: "reports/reports2",
-    element: <ReportsTwo />,
-  },
-  {
-    path: "reports/reports3",
-    element: <ReportsThree />,
   },
   {
     path: "security",
@@ -78,6 +59,10 @@ const router = createBrowserRouter([
   {
     path: "accessibility",
     element: <Accessibility />,
+  },
+  {
+    path: "admin",
+    element: <Admin />,
   },
   
 ]);
