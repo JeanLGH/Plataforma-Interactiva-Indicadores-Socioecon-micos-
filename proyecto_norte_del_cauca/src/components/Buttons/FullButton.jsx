@@ -17,15 +17,15 @@ const StyledLink = styled(Link)` // Estiliza el componente Link
 `;
 
 const Wrapper = styled.button`
-  border: 1px solid ${(props) => (props.border ? "#707070" : "#7620ff")};
-  background-color: ${(props) => (props.border ? "transparent" : "#7620ff")};
+  border: 1px solid ${(props) => (props.border ? "#00703C" : "#00703C")};
+  background-color: ${(props) => (props.border ? "transparent" : "#00703C")};
   width: 100%;
   padding: 15px;
   outline: none;
-  color: ${(props) => (props.border ? "#707070" : "#fff")};
+  color: ${(props) => (props.border ? "#00703C" : "#fff")};
   :hover {
     background-color: ${(props) => (props.border ? "transparent" : "#580cd2")};
     border: 1px solid #7620ff;
-    color: ${(props) => (props.border ? "#7620ff" : "#fff")};
+    color: ${(props) => (props.border ? "#00703C" : "#fff")};
   }
 `;
