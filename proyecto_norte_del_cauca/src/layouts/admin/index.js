@@ -8,6 +8,7 @@ import React, { useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom'
 import routes from '../../routes.js';
 import Admin from '../../pages/admin/default/index.jsx';
+import Profile from '../../pages/admin/profile/index.jsx';
 
 // Custom Chakra theme
 export default function Dashboard(props) {
@@ -142,6 +143,7 @@ export default function Dashboard(props) {
 							<Box mx='auto' p={{ base: '20px', md: '30px' }} pe='20px' minH='100vh' pt='50px'>
 								<Routes>
 									{getRoutes(routes)}
+									<Route path="/admin/profile" element={<Profile />} />
 									<Route  from='/' to='/admin' />
 								</Routes>
 								<Admin />

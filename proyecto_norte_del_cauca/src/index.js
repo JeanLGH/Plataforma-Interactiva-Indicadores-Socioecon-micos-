@@ -6,7 +6,7 @@ import Register from "./pages/register";
 import Login from "./pages/login";
 import Demografia from "./pages/demography";
 import { ChakraProvider } from '@chakra-ui/react';
-
+import Profile from './pages/admin/profile';
 import Salud from "./pages/health";
 import Security from "./pages/security";
 import Information from "./pages/information";
@@ -35,40 +35,46 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: "register",
+    path: "/register",
     element: <Register />,
   },
   {
-    path: "login",
+    path: "/login",
     element: <Login />,
   },
   {
-    path: "demography",
+    path: "/demography",
     element: <Demografia />,
   },
-
   {
-    path: "health",
+    path: "/health",
     element: <Salud />,
   },
   {
-    path: "security",
+    path: "/security",
     element: <Security />,
   },
   {
-    path: "information",
+    path: "/information",
     element: <Information />,
   },
   {
-    path: "accessibility",
+    path: "/accessibility",
     element: <Accessibility />,
   },
-  
   {
-    path: "admin",
-    element: <AdminLayout />, // Renderiza el componente Admin directamente
+    path: "/admin",
+    element: <AdminLayout />,
+   
   },
+  {
+    path: "/Profile",
+    element: <AdminLayout />,
+   
+  }
+  
 ]);
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <ChakraProvider theme={theme}>
