@@ -65,14 +65,16 @@ const LogoWrapper = styled.div`
 const NextArrow = styled.div`
   &::before {
     content: "→"; 
-    color: #580CD2; 
+    color: #0E77C8;
+
     font-size: 24px;
   }
 `;
 const PrevArrow = styled.div`
   &::before {
     content: "←"; 
-    color: #580CD2; 
+    color: #0E77C8;
+
     font-size: 24px;
   }
 `;

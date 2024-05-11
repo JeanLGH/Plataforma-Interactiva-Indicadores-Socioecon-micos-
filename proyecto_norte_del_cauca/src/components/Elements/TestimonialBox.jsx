@@ -41,7 +41,7 @@ export default function TestimonialBox({ topic, author }) {
       <QuoteWrapper>
         <FontAwesomeIcon icon={icon} size="3x" color="#ffffff" />
       </QuoteWrapper>
-      <p className="orangeColor font13" style={{alignSelf: 'flex-center'}}>
+      <p className="lightColor font-bold " style={{alignSelf: 'flex-center'}}>
         <em>{author}</em>
       </p>
     </Wrapper>
@@ -53,7 +53,7 @@ const Wrapper = styled.div`
   padding: 20px 30px;
   margin-top: 30px;
   transition: transform 0.3s ease;
-  background-color: #003768;
+  background-color: #0E77C8;
   &:hover {
     transform: translateY(-5px);
   }

@@ -26,12 +26,12 @@ export default function TopNavbar() {
       {sidebarOpen && <Backdrop toggleSidebar={toggleSidebar} />}
       <Wrapper className="flexCenter animate whiteBg" style={y > 100 ? { height: "60px" } : { height: "80px" }}>
         <NavInner className="container flexSpaceCenter">
-          <Link className="pointer flexNullCenter" to="home" smooth={true}>
+          
             <LogoIcon />
-            <h1 style={{ marginLeft: "12px" }} className="font20 extraBold">
+            <a href="/" style={{ marginLeft: "12px" }} className="font20 extraBold">
               Norte Del Cauca <span style={{ color: "#0E77C8" }}>Como</span> Vamos
-            </h1>
-          </Link>
+            </a>
+          
           <BurderWrapper className="pointer" onClick={() => toggleSidebar(!sidebarOpen)}>
             <BurgerIcon />
           </BurderWrapper>
@@ -71,7 +71,7 @@ export default function TopNavbar() {
           </UlWrapper>
           <UlWrapperRight className="flexNullCenter">
             <li className="semiBold font15 pointer">
-              <a href="/" style={{ padding: "10px 30px 10px 0" }}>
+              <a href="/login" style={{ padding: "10px 30px 10px 0" }}>
                 Inicio de sesión
               </a>
             </li>

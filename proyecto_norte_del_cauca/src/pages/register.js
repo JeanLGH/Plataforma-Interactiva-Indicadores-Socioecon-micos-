@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import NavBar from '../components/NavBar';
+import NavBar from '../components/Nav/TopNavbar';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 
 const Register = () => {
