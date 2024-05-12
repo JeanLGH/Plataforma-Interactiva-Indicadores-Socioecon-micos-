@@ -1,7 +1,9 @@
-import { MdPerson,MdHome} from "react-icons/md";
+import React from "react";
+import { MdPerson, MdHome } from "react-icons/md";
 
 import MainDashboard from "./pages/admin/default";
 import Profile from "./pages/admin/profile";
+
 
 const routes = [
   {
@@ -12,14 +14,40 @@ const routes = [
     component: MainDashboard,
   },
   {
-    name: "Profile",
+    name: "Perfil",
     layout: "/admin",
     path: "/profile",
     icon: MdPerson ,
     component: Profile,
-  }
-  
+  },
+  {
+    name: "Indicadores",
+    layout: "/admin",
+    category: true,
+    items: [
+      {
+        name: "Demografía",
+        layout: "/admin",
+        path: "/demography",
+        icon: MdPerson,
+        component: Profile,
+      },
+      {
+        name: "Salud",
+        layout: "/admin",
+        path: "/health",
+        icon: MdHome,
+        component: MainDashboard,
+      },
+      {
+        name: "Educación",
+        layout: "/admin",
+        path: "/education",
+        icon: MdPerson,
+        component: Profile,
+      },
+    ],
+  },
 ];
-
 
 export default routes;

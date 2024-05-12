@@ -129,6 +129,8 @@ export default function Dashboard(props) {
 								<Routes>
 									<Route path="/default" element={<Admin />} />
 									<Route path="/profile" element={<Profile />} />
+									<Route path="/demography" element={<Admin />} />
+
 								
 								</Routes>
 								

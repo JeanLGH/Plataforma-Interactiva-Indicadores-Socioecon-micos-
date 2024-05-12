@@ -5,6 +5,7 @@ import { Box, Flex, HStack, Text, useColorModeValue } from "@chakra-ui/react";
 export function SidebarLinks(props) {
   const location = useLocation();
   const activeColor = useColorModeValue("gray.700", "white");
+  const inactiveColor = useColorModeValue("secondaryGray.600", "white");
   const activeIcon = useColorModeValue("brand.500", "white");
   const textColor = useColorModeValue("secondaryGray.500", "white");
   const brandColor = useColorModeValue("brand.500", "brand.400");
@@ -37,7 +38,7 @@ export function SidebarLinks(props) {
             {createLinks(route.items)}
           </React.Fragment>
         );
-      } else if (route.layout === "/admin") {
+      } else if (route.layout === "/admin" || route.layout === "/auth") {
         return (
           <NavLink key={index} to={route.layout + route.path}>
             <Box>
