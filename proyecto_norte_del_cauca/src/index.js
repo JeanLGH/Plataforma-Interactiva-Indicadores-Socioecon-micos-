@@ -11,7 +11,7 @@ import Salud from "./pages/health";
 import Security from "./pages/security";
 import Information from "./pages/information";
 import Accessibility from './pages/accessibility';
-import Admin from './pages/admin/default';
+
 import AdminLayout from './layouts/admin';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -63,13 +63,13 @@ const router = createBrowserRouter([
     element: <Accessibility />,
   },
   {
-    path: "/admin",
+    path: "/admin/*",
     element: <AdminLayout />,
    
   },
   {
-    path: "/Profile",
-    element: <AdminLayout />,
+    path: "/profile",
+    element: <Profile />,
    
   }
   

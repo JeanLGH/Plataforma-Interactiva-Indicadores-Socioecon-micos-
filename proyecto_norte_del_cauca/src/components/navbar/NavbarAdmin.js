@@ -1,11 +1,14 @@
 // Chakra Imports
-import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Flex, Link, Text, useColorModeValue } from '@chakra-ui/react';
+import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Flex, Link, useColorModeValue } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import AdminNavbarLinks from './NavbarLinksAdmin';
-
+import { useLocation } from 'react-router-dom';
 export default function AdminNavbar(props) {
 	const [ scrolled, setScrolled ] = useState(false);
+	const [brandText, setBrandText] = useState(props.brandText);
+	const location = useLocation();
+
 
 	useEffect(() => {
 		window.addEventListener('scroll', changeNavbar);
@@ -15,7 +18,21 @@ export default function AdminNavbar(props) {
 		};
 	});
 
-	const { secondary, message, brandText } = props;
+	
+
+	useEffect(() => {
+		// Obtener la última parte de la URL como brandText
+		const pathnameSegments = location.pathname.split('/');
+		const lastSegment = pathnameSegments[pathnameSegments.length - 1];
+		setBrandText(capitalizeFirstLetter(lastSegment));
+	  }, [location.pathname]);
+	
+	  const capitalizeFirstLetter = (str) => {
+		return str.charAt(0).toUpperCase() + str.slice(1);
+	  };
+
+
+	console.log(brandText);
 
 	// Here are all the props that may change depending on navbar's type or state.(secondary, variant, scrolled)
 	let mainText = useColorModeValue('navy.700', 'white');
@@ -30,7 +47,7 @@ export default function AdminNavbar(props) {
 	let paddingX = '15px';
 	let gap = '0px';
 	const changeNavbar = () => {
-		if (window.scrollY > 1) {
+		if (window.scrollY > 0) {
 			setScrolled(true);
 		} else {
 			setScrolled(false);
@@ -55,7 +72,6 @@ export default function AdminNavbar(props) {
 			transition-property='box-shadow, background-color, filter, border'
 			transitionTimingFunction='linear, linear, linear, linear'
 			alignItems={{ xl: 'center' }}
-			display={secondary ? 'block' : 'flex'}
 			minH='75px'
 			justifyContent={{ xl: 'center' }}
 			lineHeight='25.6px'
@@ -131,7 +147,7 @@ export default function AdminNavbar(props) {
 					/>
 				</Box>
 			</Flex>
-			{secondary ? <Text color='white'>{message}</Text> : null}
+		
 		</Box>
 	);
 }

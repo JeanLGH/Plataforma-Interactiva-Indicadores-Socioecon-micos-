@@ -28,7 +28,6 @@ import {
 } from "./variables/columnsData";
 import tableDataCheck from "./variables/tableDataCheck.json";
 
-import SideBar from "../../../components/sidebar/Sidebar";
 
 
 export default function UserReports() {

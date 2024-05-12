@@ -1,11 +1,11 @@
 // Chakra imports
-import { Portal, Box, useDisclosure} from '@chakra-ui/react';
+import { Portal, Box, useDisclosure } from '@chakra-ui/react';
 // Layout components
 import Navbar from '../../components/navbar/NavbarAdmin.js';
 import Sidebar from '../../components/sidebar/Sidebar.js';
 import { SidebarContext } from '../../contexts/SidebarContext.js';
 import React, { useState } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import routes from '../../routes.js';
 import Admin from '../../pages/admin/default/index.jsx';
 import Profile from '../../pages/admin/profile/index.jsx';
@@ -14,12 +14,15 @@ import Profile from '../../pages/admin/profile/index.jsx';
 export default function Dashboard(props) {
 	const { ...rest } = props;
 	// states and functions
-	const [ fixed ] = useState(false);
-	const [ toggleSidebar, setToggleSidebar ] = useState(false);
+	const [fixed] = useState(false);
+	const [toggleSidebar, setToggleSidebar] = useState(false);
+
+
+	const handleToggleSidebar = () => {
+		setToggleSidebar(!toggleSidebar);
+	  };
 	// functions for changing the states from components
-	const getRoute = () => {
-		return window.location.pathname !== '/admin/full-screen-maps';
-	};
+
 	const getActiveRoute = (routes) => {
 		let activeRoute = 'Default Brand Text';
 		for (let i = 0; i < routes.length; i++) {
@@ -83,21 +86,7 @@ export default function Dashboard(props) {
 		}
 		return activeNavbar;
 	};
-	const getRoutes = (routes) => {
-		return routes.map((prop, key) => {
-			if (prop.layout === '/admin') {
-				return <Route path={prop.layout + prop.path} component={prop.component} key={key} />;
-			}
-			if (prop.collapse) {
-				return getRoutes(prop.items);
-			}
-			if (prop.category) {
-				return getRoutes(prop.items);
-			} else {
-				return null;
-			}
-		});
-	};
+
 	document.documentElement.dir = 'ltr';
 	const { onOpen } = useDisclosure();
 	document.documentElement.dir = 'ltr';
@@ -106,11 +95,7 @@ export default function Dashboard(props) {
 
 		<Box>
 			<Box>
-				<SidebarContext.Provider
-					value={{
-						toggleSidebar,
-						setToggleSidebar
-					}}>
+			<SidebarContext.Provider value={{ toggleSidebar, handleToggleSidebar }}>
 					<Sidebar routes={routes} display='none' {...rest} />
 					<Box
 						float='right'
@@ -139,16 +124,16 @@ export default function Dashboard(props) {
 							</Box>
 						</Portal>
 
-						{getRoute() ? (
+						
 							<Box mx='auto' p={{ base: '20px', md: '30px' }} pe='20px' minH='100vh' pt='50px'>
 								<Routes>
-									{getRoutes(routes)}
-									<Route path="/admin/profile" element={<Profile />} />
-									<Route  from='/' to='/admin' />
+									<Route path="/default" element={<Admin />} />
+									<Route path="/profile" element={<Profile />} />
+								
 								</Routes>
-								<Admin />
+								
 							</Box>
-						) : null}
+						
 					</Box>
 				</SidebarContext.Provider>
 			</Box>
