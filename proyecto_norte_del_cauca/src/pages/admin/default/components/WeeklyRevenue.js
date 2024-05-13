@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -13,19 +13,24 @@ import { MdBarChart } from "react-icons/md";
 
 export default function WeeklyRevenue(props) {
   const { ...rest } = props;
+  const [pyramidData, setPyramidData] = useState(null);
 
-  // Datos quemados para la demostración
-  const data = [
-    { grupo_edad: "0-9", hombres_2022: 100, mujeres_2022: 90 },
-    { grupo_edad: "10-19", hombres_2022: 120, mujeres_2022: 110 },
-    { grupo_edad: "20-29", hombres_2022: 140, mujeres_2022: 130 },
-    { grupo_edad: "30-39", hombres_2022: 160, mujeres_2022: 150 },
-    { grupo_edad: "40-49", hombres_2022: 180, mujeres_2022: 170 },
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:3001/piramidePoblacional');
+        if (!response.ok) {
+          throw new Error("Error al obtener los datos del servidor");
+        }
+        const data = await response.json();
+        setPyramidData(data);
+      } catch (error) {
+        console.error("Error al obtener los datos de la pirámide poblacional:", error);
+      }
+    };
 
-  const ageGroups = data.map(item => item.grupo_edad);
-  const maleData = data.map(item => ({ name: item.grupo_edad, value: item.hombres_2022 }));
-  const femaleData = data.map(item => ({ name: item.grupo_edad, value: item.mujeres_2022 }));
+    fetchData();
+  }, []);
 
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
@@ -68,7 +73,9 @@ export default function WeeklyRevenue(props) {
       </Flex>
 
       <Box h='240px' mt='auto'>
-        <PyramidChart maleData={maleData} femaleData={femaleData} ageGroups={ageGroups} />
+        {pyramidData && (
+          <PyramidChart data={pyramidData} />
+        )}
       </Box>
     </Card>
   );

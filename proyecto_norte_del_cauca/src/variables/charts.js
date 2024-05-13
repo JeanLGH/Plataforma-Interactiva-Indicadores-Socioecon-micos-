@@ -39,29 +39,23 @@ export const barChartDataDailyTraffic = (dataDb) => {
 };
 
 
-export const PyramidChart = ({ maleData, femaleData, ageGroups }) => {
-  // Calcular la suma total de población para cada grupo de edad
-  const totalPopulation = ageGroups.map((ageGroup, index) => {
-    return {
-      ageGroup: ageGroup,
-      total: maleData[index].value + femaleData[index].value
-    };
-  });
-
+export const PyramidChart = ({ data }) => {
+  console.log(data)
   return (
     <ResponsiveContainer width="100%" height="100%">
-      <BarChart layout="vertical" data={totalPopulation}>
+      <BarChart data={data} layout="vertical">
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis type="number" hide />
-        <YAxis dataKey="ageGroup" type="category" />
+        <XAxis type="number" />
+        <YAxis type="category" dataKey="grupo_edad" />
         <Tooltip />
         <Legend />
-        <Bar dataKey="total" fill="#8884d8" stackId="a" />
-        <Bar dataKey="total" fill="#82ca9d" stackId="a" />
+        <Bar dataKey="hombres_2022" fill="#8884d8" stackId="a" />
+        <Bar dataKey="mujeres_2022" fill="#82ca9d" stackId="a" />
       </BarChart>
     </ResponsiveContainer>
   );
 };
+
 
 export const CustomBarChart = ({ data, xAxisDataKey, barDataKey }) => {
 
