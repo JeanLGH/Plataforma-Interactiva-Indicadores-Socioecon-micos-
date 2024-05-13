@@ -1,5 +1,5 @@
 // Chakra imports
-import { Box, Flex, Text, Select, useColorModeValue } from "@chakra-ui/react";
+import { Box, Flex, Text, useColorModeValue } from "@chakra-ui/react";
 // Custom components
 import Card from "../../../../components/card/Card.js";
 import PieChart from "../../../../components/charts/PieChart";
@@ -53,16 +53,6 @@ export default function Conversion(props) {
         <Text color={textColor} fontSize='md' fontWeight='600' mt='4px'>
           Distribución de {dataDb && dataDb.length > 0 ? Object.keys(dataDb[0])[1] : "Columna1"} por {dataDb && dataDb.length > 0 ? Object.keys(dataDb[0])[0] : "Columna2"}
         </Text>
-        <Select
-          fontSize='sm'
-          variant='subtle'
-          defaultValue='monthly'
-          width='unset'
-          fontWeight='700'>
-          <option value='daily'>Daily</option>
-          <option value='monthly'>Monthly</option>
-          <option value='yearly'>Yearly</option>
-        </Select>
       </Flex>
 
       {dataDb ? (

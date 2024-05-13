@@ -1,8 +1,6 @@
 import {
   Box,
-  Flex,
   Icon,
-  Select,
   SimpleGrid,
   useColorModeValue,
   AspectRatio,
@@ -18,17 +16,11 @@ import {
   MdBarChart,
   MdFileCopy,
 } from "react-icons/md";
-import CheckTable from "./components/CheckTable";
 import DailyTraffic from "./components/DailyTraffic";
 import PieCard from "./components/PieCard";
 import TotalSpent from "./components/TotalSpent";
 import WeeklyRevenue from "./components/WeeklyRevenue";
 import MapComponent from "../../../components/MapComponents/MapComponent";
-import {
-  columnsDataCheck,
-
-} from "./variables/columnsData";
-import tableDataCheck from "./variables/tableDataCheck.json";
 
 
 
@@ -76,25 +68,6 @@ export default function UserReports() {
           }
           name='Spend this month'
           value='$642.39'
-        />
-        <MiniStatistics growth='+23%' name='Sales' value='$574.34' />
-        <MiniStatistics
-          endContent={
-            <Flex me='-16px' mt='10px'>
-              <Select
-                id='balance'
-                variant='mini'
-                mt='5px'
-                me='0px'
-                defaultValue='usd'>
-                <option value='usd'>USD</option>
-                <option value='eur'>EUR</option>
-                <option value='gba'>GBA</option>
-              </Select>
-            </Flex>
-          }
-          name='Your balance'
-          value='$1,000'
         />
         <MiniStatistics
           startContent={
