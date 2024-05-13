@@ -39,11 +39,13 @@ export const barChartDataDailyTraffic = (dataDb) => {
 };
 
 
-export const PyramidChart = ({ data }) => {
-  console.log(data)
+export const PyramidChart = ({ data, selectedMunicipio  }) => {
+  // Filtrar los datos por el municipio seleccionado
+  const filteredData = selectedMunicipio ? data.filter(entry => entry.municipio === selectedMunicipio) : data;
+
   return (
     <ResponsiveContainer width="100%" height="100%">
-      <BarChart data={data} layout="vertical">
+      <BarChart data={filteredData} layout="vertical">
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis type="number" />
         <YAxis type="category" dataKey="grupo_edad" />

@@ -10,7 +10,7 @@ import '../../../assets/css/App.css';
 // Custom components
 import MiniStatistics from "../../../components/card/MiniStatistics";
 import IconBox from "../../../components/icons/IconBox";
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import {
   MdAttachMoney,
   MdBarChart,
@@ -27,12 +27,56 @@ import MapComponent from "../../../components/MapComponents/MapComponent";
 
 
 export default function UserReports() {
+
+
+
   // Chakra Color Mode
 
   const center = [2.283333, -76.85];
   const [mousePosition, setMousePosition] = useState(null);
   const brandColor = useColorModeValue("brand.500", "white");
   const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
+
+  const [totalPoblacion, setTotalPoblacion] = useState(null);
+  //Total Población:
+  useEffect(() => {
+    const fetchTotalPoblacion = async () => {
+        try {
+          const response = await fetch('http://localhost:3001/total2022Poblacion');
+          if (!response.ok) {
+            throw new Error('Error al obtener los datos del servidor');
+          }
+          const data = await response.json();
+          setTotalPoblacion(data);
+        } catch (error) {
+          console.error('Error al obtener el total de población:', error);
+         
+        }
+      };
+    fetchTotalPoblacion();
+}, []);
+
+
+
+  const [dataDb, setDataDb] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:3001/datos2022Poblacion');
+        if (!response.ok) {
+          throw new Error("Error al obtener los datos del servidor");
+        }
+        const data = await response.json();
+        setDataDb(data);
+      } catch (error) {
+        console.error("Error al obtener los datos de la base de datos:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
 
 
@@ -53,7 +97,7 @@ export default function UserReports() {
             />
           }
           name='Earnings'
-          value='$350.4'
+          value= {totalPoblacion ? totalPoblacion[0].total_poblacion : 'Cargando...'}
         />
         <MiniStatistics
           startContent={

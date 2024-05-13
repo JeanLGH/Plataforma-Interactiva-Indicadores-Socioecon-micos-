@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
 import {
-  Box,
-  Button,
-  Flex,
-  Icon,
+  Box, 
+  Select,
+  Flex, 
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
 import Card from "../../../../components/card/Card.js";
 import { PyramidChart } from "../../../../variables/charts.js";
-import { MdBarChart } from "react-icons/md";
 
 export default function WeeklyRevenue(props) {
   const { ...rest } = props;
   const [pyramidData, setPyramidData] = useState(null);
+  const [selectedMunicipio, setSelectedMunicipio] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,19 +31,15 @@ export default function WeeklyRevenue(props) {
     fetchData();
   }, []);
 
+  const handleMunicipioChange = (event) => {
+    setSelectedMunicipio(event.target.value);
+  };
+
+
+  const municipios = pyramidData ? [...new Set(pyramidData.map(entry => entry.municipio))] : [];
+
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
-  const iconColor = useColorModeValue("brand.500", "white");
-  const bgButton = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
-  const bgHover = useColorModeValue(
-    { bg: "secondaryGray.400" },
-    { bg: "whiteAlpha.50" }
-  );
-  const bgFocus = useColorModeValue(
-    { bg: "secondaryGray.300" },
-    { bg: "whiteAlpha.100" }
-  );
-
   return (
     <Card align='center' direction='column' w='100%' {...rest}>
       <Flex align='center' w='100%' px='15px' py='10px'>
@@ -54,27 +49,34 @@ export default function WeeklyRevenue(props) {
           fontSize='xl'
           fontWeight='700'
           lineHeight='100%'>
-          Weekly Revenue
+          Piramide Poblacional por Municipios
         </Text>
-        <Button
-          align='center'
-          justifyContent='center'
-          bg={bgButton}
-          _hover={bgHover}
-          _focus={bgFocus}
-          _active={bgFocus}
-          w='37px'
-          h='37px'
-          lineHeight='100%'
-          borderRadius='10px'
-          {...rest}>
-          <Icon as={MdBarChart} color={iconColor} w='24px' h='24px' />
-        </Button>
       </Flex>
+
+      <Box mt='20px'>
+        {pyramidData && (
+          <Flex justify='center'>
+            <Select
+              placeholder="Todos los municipios"
+              value={selectedMunicipio}
+              onChange={handleMunicipioChange}
+              bg="white"
+              color={textColor}
+              borderColor="secondaryGray.400"
+              _hover={{ borderColor: "secondaryGray.600" }}
+              _focus={{ borderColor: "secondaryGray.600" }}
+            >
+              {municipios.map(municipio => (
+                <option key={municipio} value={municipio}>{municipio}</option>
+              ))}
+            </Select>
+          </Flex>
+        )}
+      </Box>
 
       <Box h='240px' mt='auto'>
         {pyramidData && (
-          <PyramidChart data={pyramidData} />
+          <PyramidChart data={pyramidData} selectedMunicipio={selectedMunicipio} />
         )}
       </Box>
     </Card>
