@@ -1,5 +1,21 @@
 // Daily Traffic Dashboards Default
-
+const generateColors = (count) => {
+  const palette = [ 
+                  
+                  
+                   "#FF99E6",   "#33FFCC",
+                   "#66994D", "#B366CC", "#4D8000", "#B33300", "#CC80CC", 
+                   "#66664D", "#991AFF", "#E666FF", "#4DB3FF", "#1AB399",
+                   "#E666B3", "#33991A", "#CC9999", "#B3B31A", "#00E680", 
+                   "#4D8066", "#809980", "#E6FF80", "#1AFF33", "#999933", 
+                   "#FF3380", "#CCCC00", "#66E64D", "#4D80CC", "#9900B3", 
+                   "#E64D66", "#4DB380", "#FF4D4D", "#99E6E6", "#6666FF"];
+  const colors = [];
+  for (let i = 0; i < count; i++) {
+    colors.push(palette[i % palette.length]); // Selecciona colores de manera cíclica de la paleta
+  }
+  return colors;
+};
 export const barChartDataDailyTraffic = [
   {
     name: "Daily Traffic",
@@ -208,46 +224,74 @@ export const barChartOptionsConsumption = {
   },
 };
 
-export const pieChartOptions = {
-  labels: ["Your files", "System", "Empty"],
-  colors: ["#4318FF", "#6AD2FF", "#EFF4FB"],
-  chart: {
-    width: "50px",
-  },
-  states: {
-    hover: {
-      filter: {
-        type: "none",
+
+
+export const getPieChartOptions = (dataDb) => {
+  // Extraer los nombres de los municipios del array dataDb
+  //Santader de Quilichao, Puerto Tejada, Guachené
+  const municipiosOfInterest = ['Santander de Quilichao', 'Puerto Tejada', 'Guachené'];
+  const filteredData = dataDb ? dataDb.filter((item) => municipiosOfInterest.includes(item.MunicipioAS)) : [];
+  const colors = generateColors(municipiosOfInterest.length); // Generar colores aleatorios para cada municipio
+
+  const labels = filteredData.map((item) => item.MunicipioAS);
+  return {
+    labels: labels , // Usar los nombres de municipios si están disponibles
+    chart: {
+      width: "400px", // Ancho del gráfico
+      height: "400px", // Alto del gráfico
+    },
+    states: {
+      hover: {
+        filter: {
+          type: "none",
+        },
       },
     },
-  },
-  legend: {
-    show: false,
-  },
-  dataLabels: {
-    enabled: false,
-  },
-  hover: { mode: null },
-  plotOptions: {
-    donut: {
-      expandOnClick: false,
+    legend: {
+      show: true, // Mostrar leyenda
+      position: "bottom", // Posición de la leyenda
+      horizontalAlign: "center", // Alineación horizontal de la leyenda
+      floating: false, // Leyenda flotante
+      fontSize: "14px", // Tamaño de fuente de la leyenda
+      offsetX: 0, // Desplazamiento horizontal de la leyenda
+      offsetY: 0, // Desplazamiento vertical de la leyenda
+      onItemClick: {
+        toggleDataSeries: true,
+      },
+      onItemHover: {
+        highlightDataSeries: true,
+      },
+    },
+    dataLabels: {
+      enabled: false, // Desactivar etiquetas de datos
+    },
+    hover: { mode: null },
+    plotOptions: {
       donut: {
+        expandOnClick: false,
         labels: {
           show: false,
         },
       },
     },
-  },
-  fill: {
-    colors: ["#4318FF", "#6AD2FF", "#EFF4FB"],
-  },
-  tooltip: {
-    enabled: true,
-    theme: "dark",
-  },
+    fill: {
+      colors: colors, // Colores de relleno
+    },
+    tooltip: {
+      enabled: true, // Activar tooltips
+      theme: "dark", // Tema oscuro
+    },
+  };
 };
 
-export const pieChartData = [63, 25, 12];
+
+export const getPieChartData = (dataDb) => {
+  const municipiosOfInterest = ['Santander de Quilichao', 'Puerto Tejada', 'Guachené'];
+  const filteredData = dataDb ? dataDb.filter((item) => municipiosOfInterest.includes(item.MunicipioAS)) : [];
+  const values = filteredData.map((item) => item.Poblacion_DANE);
+  console.log(values);
+  return values ;
+};
 
 // Total Spent Default
 

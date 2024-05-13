@@ -3,12 +3,37 @@ import { Box, Flex, Text, Select, useColorModeValue } from "@chakra-ui/react";
 // Custom components
 import Card from "../../../../components/card/Card.js";
 import PieChart from "../../../../components/charts/PieChart";
-import { pieChartData, pieChartOptions } from "../../../../variables/charts";
+import { getPieChartOptions, getPieChartData  } from "../../../../variables/charts";
 import { VSeparator } from "../../../../components/separator/Separator";
-import React from "react";
+import React, {useEffect, useState}from "react";
 
 export default function Conversion(props) {
+
+  const [dataDb, setDataDb] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:3001/datos2022Poblacion');
+        if (!response.ok) {
+          throw new Error("Error al obtener los datos del servidor");
+        }
+        const data = await response.json();
+        setDataDb(data);
+      } catch (error) {
+        console.error("Error al obtener los datos de la base de datos:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  console.log(dataDb);
+
   const { ...rest } = props;
+
+  const pieChartOptions = getPieChartOptions(dataDb);
+  const pieChartData = getPieChartData(dataDb);
 
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
@@ -40,12 +65,17 @@ export default function Conversion(props) {
         </Select>
       </Flex>
 
+      {dataDb ? (
       <PieChart
         h='100%'
         w='100%'
         chartData={pieChartData}
         chartOptions={pieChartOptions}
       />
+    ) : (
+      <div>Loading...</div>
+    )}
+
       <Card
         bg={cardColor}
         flexDirection='row'
