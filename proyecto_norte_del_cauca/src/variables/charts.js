@@ -1,5 +1,6 @@
 // Daily Traffic Dashboards Default
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid, ResponsiveContainer } from "recharts";
+import { sumBy } from "lodash"; 
 const municipiosOfInterest = ['Santander De Quilichao', 'Puerto Tejada', 'Guachené'];
 const removeDuplicates = (arr, prop) => arr.filter((obj, index) => arr.map(mapObj => mapObj[prop]).indexOf(obj[prop]) === index);
 const generateColors = (count) => {
@@ -38,6 +39,29 @@ export const barChartDataDailyTraffic = (dataDb) => {
 };
 
 
+export const PyramidChart = ({ maleData, femaleData, ageGroups }) => {
+  // Calcular la suma total de población para cada grupo de edad
+  const totalPopulation = ageGroups.map((ageGroup, index) => {
+    return {
+      ageGroup: ageGroup,
+      total: maleData[index].value + femaleData[index].value
+    };
+  });
+
+  return (
+    <ResponsiveContainer width="100%" height="100%">
+      <BarChart layout="vertical" data={totalPopulation}>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis type="number" hide />
+        <YAxis dataKey="ageGroup" type="category" />
+        <Tooltip />
+        <Legend />
+        <Bar dataKey="total" fill="#8884d8" stackId="a" />
+        <Bar dataKey="total" fill="#82ca9d" stackId="a" />
+      </BarChart>
+    </ResponsiveContainer>
+  );
+};
 
 export const CustomBarChart = ({ data, xAxisDataKey, barDataKey }) => {
 

@@ -1,4 +1,4 @@
-// Chakra imports
+import React from "react";
 import {
   Box,
   Button,
@@ -8,17 +8,24 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import Card from "../../../../components/card/Card.js";
-// Custom components
-import BarChart from "../../../../components/charts/BarChart";
-import React from "react";
-import {
-  barChartDataConsumption,
-  barChartOptionsConsumption,
-} from "../../../../variables/charts.js";
+import { PyramidChart } from "../../../../variables/charts.js";
 import { MdBarChart } from "react-icons/md";
 
 export default function WeeklyRevenue(props) {
   const { ...rest } = props;
+
+  // Datos quemados para la demostración
+  const data = [
+    { grupo_edad: "0-9", hombres_2022: 100, mujeres_2022: 90 },
+    { grupo_edad: "10-19", hombres_2022: 120, mujeres_2022: 110 },
+    { grupo_edad: "20-29", hombres_2022: 140, mujeres_2022: 130 },
+    { grupo_edad: "30-39", hombres_2022: 160, mujeres_2022: 150 },
+    { grupo_edad: "40-49", hombres_2022: 180, mujeres_2022: 170 },
+  ];
+
+  const ageGroups = data.map(item => item.grupo_edad);
+  const maleData = data.map(item => ({ name: item.grupo_edad, value: item.hombres_2022 }));
+  const femaleData = data.map(item => ({ name: item.grupo_edad, value: item.mujeres_2022 }));
 
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
@@ -32,6 +39,7 @@ export default function WeeklyRevenue(props) {
     { bg: "secondaryGray.300" },
     { bg: "whiteAlpha.100" }
   );
+
   return (
     <Card align='center' direction='column' w='100%' {...rest}>
       <Flex align='center' w='100%' px='15px' py='10px'>
@@ -60,10 +68,7 @@ export default function WeeklyRevenue(props) {
       </Flex>
 
       <Box h='240px' mt='auto'>
-        <BarChart
-          chartData={barChartDataConsumption}
-          chartOptions={barChartOptionsConsumption}
-        />
+        <PyramidChart maleData={maleData} femaleData={femaleData} ageGroups={ageGroups} />
       </Box>
     </Card>
   );
