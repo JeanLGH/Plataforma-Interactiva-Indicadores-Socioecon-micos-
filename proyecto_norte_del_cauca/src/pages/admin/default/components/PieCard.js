@@ -3,9 +3,9 @@ import { Box, Flex, Text, Select, useColorModeValue } from "@chakra-ui/react";
 // Custom components
 import Card from "../../../../components/card/Card.js";
 import PieChart from "../../../../components/charts/PieChart";
-import { getPieChartOptions, getPieChartData  } from "../../../../variables/charts";
+import { getPieChartOptions, getPieChartData } from "../../../../variables/charts";
 import { VSeparator } from "../../../../components/separator/Separator";
-import React, {useEffect, useState}from "react";
+import React, { useEffect, useState } from "react";
 
 export default function Conversion(props) {
 
@@ -51,7 +51,7 @@ export default function Conversion(props) {
         w='100%'
         mb='8px'>
         <Text color={textColor} fontSize='md' fontWeight='600' mt='4px'>
-          Your Pie Chart
+          Distribución de {dataDb && dataDb.length > 0 ? Object.keys(dataDb[0])[1] : "Columna1"} por {dataDb && dataDb.length > 0 ? Object.keys(dataDb[0])[0] : "Columna2"}
         </Text>
         <Select
           fontSize='sm'
@@ -66,15 +66,15 @@ export default function Conversion(props) {
       </Flex>
 
       {dataDb ? (
-      <PieChart
-        h='100%'
-        w='100%'
-        chartData={pieChartData}
-        chartOptions={pieChartOptions}
-      />
-    ) : (
-      <div>Loading...</div>
-    )}
+        <PieChart
+          h='100%'
+          w='100%'
+          chartData={pieChartData}
+          chartOptions={pieChartOptions}
+        />
+      ) : (
+        <div>Loading...</div>
+      )}
 
       <Card
         bg={cardColor}
