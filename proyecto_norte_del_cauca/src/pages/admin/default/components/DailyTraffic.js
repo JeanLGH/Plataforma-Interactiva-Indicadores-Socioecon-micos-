@@ -1,7 +1,7 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 
 // Chakra imports
-import { Box, Flex, Icon, Text, useColorModeValue } from "@chakra-ui/react";
+import { Box, Flex, Text, useColorModeValue } from "@chakra-ui/react";
 import BarChart from "../../../../components/charts/BarChart";
 
 // Custom components
@@ -9,14 +9,36 @@ import Card from "../../../../components/card/Card.js";
 import {
   barChartDataDailyTraffic,
   barChartOptionsDailyTraffic,
+  CustomBarChart,
 } from "../../../../variables/charts.js";
 
-// Assets
-import { RiArrowUpSFill } from "react-icons/ri";
-
 export default function DailyTraffic(props) {
-  const { ...rest } = props;
 
+  const [dataDb, setDataDb] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:3001/datos2022Poblacion');
+        if (!response.ok) {
+          throw new Error("Error al obtener los datos del servidor");
+        }
+        const data = await response.json();
+        setDataDb(data);
+      } catch (error) {
+        console.error("Error al obtener los datos de la base de datos:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const { ...rest } = props;
+  const getBarData = barChartDataDailyTraffic(dataDb)
+  const getBartOptions = barChartOptionsDailyTraffic(dataDb, ["Santander De Quilichao", "Puerto Tejada", "Guachenée"]);
+
+  console.log(getBarData)
+  console.log(getBartOptions)
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
   return (
@@ -29,7 +51,7 @@ export default function DailyTraffic(props) {
               color='secondaryGray.600'
               fontSize='sm'
               fontWeight='500'>
-              Daily Traffic
+                Barra de {dataDb && dataDb.length > 0 ? Object.keys(dataDb[0])[1] : "Columna1"} por {dataDb && dataDb.length > 0 ? Object.keys(dataDb[0])[0] : "Columna2"}
             </Text>
           </Flex>
           <Flex align='end'>
@@ -49,18 +71,11 @@ export default function DailyTraffic(props) {
             </Text>
           </Flex>
         </Flex>
-        <Flex align='center'>
-          <Icon as={RiArrowUpSFill} color='green.500' />
-          <Text color='green.500' fontSize='sm' fontWeight='700'>
-            +2.45%
-          </Text>
-        </Flex>
       </Flex>
       <Box h='240px' mt='auto'>
-        <BarChart
-          chartData={barChartDataDailyTraffic}
-          chartOptions={barChartOptionsDailyTraffic}
-        />
+        
+      <CustomBarChart data={dataDb} xAxisDataKey="MunicipioAS" barDataKey="Poblacion_DANE" />
+      
       </Box>
     </Card>
   );

@@ -1,122 +1,165 @@
 // Daily Traffic Dashboards Default
+import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid, ResponsiveContainer } from "recharts";
+const municipiosOfInterest = ['Santander De Quilichao', 'Puerto Tejada', 'Guachené'];
+const removeDuplicates = (arr, prop) => arr.filter((obj, index) => arr.map(mapObj => mapObj[prop]).indexOf(obj[prop]) === index);
 const generateColors = (count) => {
-  const palette = [ 
-                  
-                  
-                   "#FF99E6",   "#33FFCC",
-                   "#66994D", "#B366CC", "#4D8000", "#B33300", "#CC80CC", 
-                   "#66664D", "#991AFF", "#E666FF", "#4DB3FF", "#1AB399",
-                   "#E666B3", "#33991A", "#CC9999", "#B3B31A", "#00E680", 
-                   "#4D8066", "#809980", "#E6FF80", "#1AFF33", "#999933", 
-                   "#FF3380", "#CCCC00", "#66E64D", "#4D80CC", "#9900B3", 
-                   "#E64D66", "#4DB380", "#FF4D4D", "#99E6E6", "#6666FF"];
+  const palette = [
+
+
+    "#FF99E6", "#33FFCC",
+    "#66994D", "#B366CC", "#4D8000", "#B33300", "#CC80CC",
+    "#66664D", "#991AFF", "#E666FF", "#4DB3FF", "#1AB399",
+    "#E666B3", "#33991A", "#CC9999", "#B3B31A", "#00E680",
+    "#4D8066", "#809980", "#E6FF80", "#1AFF33", "#999933",
+    "#FF3380", "#CCCC00", "#66E64D", "#4D80CC", "#9900B3",
+    "#E64D66", "#4DB380", "#FF4D4D", "#99E6E6", "#6666FF"];
   const colors = [];
   for (let i = 0; i < count; i++) {
     colors.push(palette[i % palette.length]); // Selecciona colores de manera cíclica de la paleta
   }
   return colors;
 };
-export const barChartDataDailyTraffic = [
-  {
-    name: "Daily Traffic",
-    data: [20, 30, 40, 20, 45, 50, 30],
-  },
-];
+export const barChartDataDailyTraffic = (dataDb) => {
+  console.log("Datos de la base de datos:", dataDb);
+  const filteredData = dataDb ? removeDuplicates(dataDb.filter((item) => municipiosOfInterest.includes(item.MunicipioAS)), 'Poblacion_DANE') : [];
 
-export const barChartOptionsDailyTraffic = {
-  chart: {
-    toolbar: {
-      show: false,
+  // Usar la población de la base de datos como los datos para la gráfica
+  const datos = filteredData.map((item) => item.Poblacion_DANE);
+  console.log("Datos de población después de filtrar:", datos);
+  const datap = datos
+  console.log(datap)
+  return [
+    {
+      name: "Poblacion_DANE",
+      data: datap,
     },
-  },
-  tooltip: {
-    style: {
-      fontSize: "12px",
-      fontFamily: undefined,
+  ];
+
+};
+
+
+
+export const CustomBarChart = ({ data, xAxisDataKey, barDataKey }) => {
+
+  const filteredData = data ? removeDuplicates(data.filter((item) => municipiosOfInterest.includes(item.MunicipioAS)), 'MunicipioAS') : [];
+  return (
+    <ResponsiveContainer width="100%" height="100%">
+      <BarChart data={filteredData}>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey={xAxisDataKey} />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Bar dataKey={barDataKey} fill="#8884d8" />
+      </BarChart>
+    </ResponsiveContainer>
+  );
+};
+
+
+
+export const barChartOptionsDailyTraffic = (dataDb) => {
+  const filteredData = dataDb ? removeDuplicates(dataDb.filter((item) => municipiosOfInterest.includes(item.MunicipioAS)), 'MunicipioAS') : [];
+
+  // Usar los municipios de la base de datos como las categorías para la gráfica
+  const categories = filteredData.map((item) => item.MunicipioAS);
+  console.log(categories);
+
+  return {
+    chart: {
+      toolbar: {
+        show: false,
+      },
     },
-    onDatasetHover: {
+    tooltip: {
       style: {
         fontSize: "12px",
         fontFamily: undefined,
       },
-    },
-    theme: "dark",
-  },
-  xaxis: {
-    categories: ["00", "04", "08", "12", "14", "16", "18"],
-    show: false,
-    labels: {
-      show: true,
-      style: {
-        colors: "#A3AED0",
-        fontSize: "14px",
-        fontWeight: "500",
+      onDatasetHover: {
+        style: {
+          fontSize: "12px",
+          fontFamily: undefined,
+        },
       },
-    },
-    axisBorder: {
-      show: false,
-    },
-    axisTicks: {
-      show: false,
-    },
-  },
-  yaxis: {
-    show: false,
-    color: "black",
-    labels: {
-      show: true,
-      style: {
-        colors: "#CBD5E0",
-        fontSize: "14px",
-      },
-    },
-  },
-  grid: {
-    show: false,
-    strokeDashArray: 5,
-    yaxis: {
-      lines: {
-        show: true,
-      },
+      theme: "dark",
     },
     xaxis: {
-      lines: {
+      categories: ["Santander De Quilichao", "Puerto Tejada", "Guachenée"],
+      show: false,
+      labels: {
+        show: true,
+        style: {
+          colors: "#A3AED0",
+          fontSize: "14px",
+          fontWeight: "500",
+        },
+      },
+      axisBorder: {
+        show: false,
+      },
+      axisTicks: {
         show: false,
       },
     },
-  },
-  fill: {
-    type: "gradient",
-    gradient: {
-      type: "vertical",
-      shadeIntensity: 1,
-      opacityFrom: 0.7,
-      opacityTo: 0.9,
-      colorStops: [
-        [
-          {
-            offset: 0,
-            color: "#4318FF",
-            opacity: 1,
-          },
-          {
-            offset: 100,
-            color: "rgba(67, 24, 255, 1)",
-            opacity: 0.28,
-          },
+    yaxis: {
+      show: false,
+      color: "black",
+      labels: {
+        show: true,
+        style: {
+          colors: "#CBD5E0",
+          fontSize: "14px",
+        },
+      },
+    },
+    grid: {
+      show: false,
+      strokeDashArray: 5,
+      yaxis: {
+        lines: {
+          show: true,
+        },
+      },
+      xaxis: {
+        lines: {
+          show: false,
+        },
+      },
+    },
+    fill: {
+      type: "gradient",
+      gradient: {
+        type: "vertical",
+        shadeIntensity: 1,
+        opacityFrom: 0.7,
+        opacityTo: 0.9,
+        colorStops: [
+          [
+            {
+              offset: 0,
+              color: "#4318FF",
+              opacity: 1,
+            },
+            {
+              offset: 100,
+              color: "rgba(67, 24, 255, 1)",
+              opacity: 0.28,
+            },
+          ],
         ],
-      ],
+      },
     },
-  },
-  dataLabels: {
-    enabled: false,
-  },
-  plotOptions: {
-    bar: {
-      borderRadius: 10,
-      columnWidth: "40px",
+    dataLabels: {
+      enabled: false,
     },
-  },
+    plotOptions: {
+      bar: {
+        borderRadius: 10,
+        columnWidth: "40px",
+      },
+    },
+  };
 };
 
 // Consumption Users Reports
@@ -228,17 +271,16 @@ export const barChartOptionsConsumption = {
 
 export const getPieChartOptions = (dataDb) => {
   // Extraer los nombres de los municipios del array dataDb
-  //Santader de Quilichao, Puerto Tejada, Guachené
-  const municipiosOfInterest = ['Santander de Quilichao', 'Puerto Tejada', 'Guachené'];
-  const filteredData = dataDb ? dataDb.filter((item) => municipiosOfInterest.includes(item.MunicipioAS)) : [];
+  const filteredData = dataDb ? removeDuplicates(dataDb.filter((item) => municipiosOfInterest.includes(item.MunicipioAS)), 'MunicipioAS') : [];
   const colors = generateColors(municipiosOfInterest.length); // Generar colores aleatorios para cada municipio
-
+  console.log(filteredData);
   const labels = filteredData.map((item) => item.MunicipioAS);
+
   return {
-    labels: labels , // Usar los nombres de municipios si están disponibles
+    labels: labels,
     chart: {
-      width: "400px", // Ancho del gráfico
-      height: "400px", // Alto del gráfico
+      width: "400px",
+      height: "400px",
     },
     states: {
       hover: {
@@ -286,11 +328,10 @@ export const getPieChartOptions = (dataDb) => {
 
 
 export const getPieChartData = (dataDb) => {
-  const municipiosOfInterest = ['Santander de Quilichao', 'Puerto Tejada', 'Guachené'];
-  const filteredData = dataDb ? dataDb.filter((item) => municipiosOfInterest.includes(item.MunicipioAS)) : [];
+  const filteredData = dataDb ? removeDuplicates(dataDb.filter((item) => municipiosOfInterest.includes(item.MunicipioAS)), 'Poblacion_DANE') : [];
   const values = filteredData.map((item) => item.Poblacion_DANE);
   console.log(values);
-  return values ;
+  return values;
 };
 
 // Total Spent Default
