@@ -63,6 +63,19 @@ app.get('/piramidePoblacional', async (req, res, next) => {
   }
 });
 
+app.get('/piramidePoblacionalTotal', async (req, res, next) => {
+  try {
+    const result = await client.query(`
+      SELECT sum(hombres_2022) as hombres, sum(mujeres_2022) as mujeres, municipio
+      FROM public.piramide_poblacional
+    GROUP BY municipio
+        `);
+    res.status(200).json(result.rows);
+  } catch (error) {
+    next(error);
+  }
+});
+
 app.get('/proyeccionHogares', async (req, res, next) => {
   try {
     const result = await client.query(`

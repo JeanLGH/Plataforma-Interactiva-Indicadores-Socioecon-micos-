@@ -9,37 +9,15 @@ import {
 import Card from "../../../../components/card/Card.js";
 import { PyramidChart } from "../../../../variables/charts.js";
 
-export default function WeeklyRevenue(props) {
-  const { ...rest } = props;
-  const [pyramidData, setPyramidData] = useState(null);
-  const [selectedMunicipio, setSelectedMunicipio] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('http://localhost:3001/piramidePoblacional');
-        if (!response.ok) {
-          throw new Error("Error al obtener los datos del servidor");
-        }
-        const data = await response.json();
-        setPyramidData(data);
-      } catch (error) {
-        console.error("Error al obtener los datos de la pirámide poblacional:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  const handleMunicipioChange = (event) => {
-    setSelectedMunicipio(event.target.value);
-  };
-
-
+export default function WeeklyRevenue({ pyramidData, selectedMunicipio, handleMunicipioChange, ...rest }) {
+  // Lista de municipios disponibles
   const municipios = pyramidData ? [...new Set(pyramidData.map(entry => entry.municipio))] : [];
+  
+
 
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
+
   return (
     <Card align='center' direction='column' w='100%' {...rest}>
       <Flex align='center' w='100%' px='15px' py='10px'>
