@@ -63,6 +63,18 @@ app.get('/piramidePoblacional', async (req, res, next) => {
   }
 });
 
+app.get('/proyeccionHogares', async (req, res, next) => {
+  try {
+    const result = await client.query(`
+    SELECT  "Nombre_Municipio", "Area", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032", "2033", "2034", "2035"
+    FROM public.proyecciones_de_hogares_2018_2035
+      `);
+    res.status(200).json(result.rows);
+  } catch (error) {
+    next(error);
+  }
+});
+
 
 // Ruta de prueba
 app.get('/', (req, res) => {
