@@ -50,36 +50,36 @@ const Graphic = ({ totalPoblacion }) => {
                         ))}
                     </Pie>
                     <PieLegend
-        layout="horizontal"
-        align="center"
-        verticalAlign="bottom"
-        iconSize={10} // Tamaño de los iconos de la leyenda
-        iconType="square"
-        margin={{ top: 10 }} // Forma de los iconos de la leyenda
-    />
+                        layout="horizontal"
+                        align="center"
+                        verticalAlign="bottom"
+                        iconSize={10} // Tamaño de los iconos de la leyenda
+                        iconType="square"
+                        margin={{ top: 10 }} // Forma de los iconos de la leyenda
+                    />
                 </PieChart>
             );
         } else if (chartType === 'line') {
-            
+
             return (
-              <LineChart
-              width={500}
-              height={300}
-              data={totalPoblacion}
-              margin={{
-                top: 5,
-                right: 30,
-                left: 20,
-                bottom: 5,
-              }}
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="MunicipioAS" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Line type="monotone" dataKey="Poblacion_DANE" stroke="#8884d8" activeDot={{ r: 8 }} name="PoblaciÃ³n" />
-            </LineChart>
+                <LineChart
+                    width={500}
+                    height={300}
+                    data={totalPoblacion}
+                    margin={{
+                        top: 5,
+                        right: 30,
+                        left: 20,
+                        bottom: 5,
+                    }}
+                >
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="MunicipioAS" />
+                    <YAxis />
+                    <Tooltip />
+                    <Legend />
+                    <Line type="monotone" dataKey="Poblacion_DANE" stroke="#8884d8" activeDot={{ r: 8 }} name="PoblaciÃ³n" />
+                </LineChart>
             );
         } else if (chartType === 'linearea') {
             const dataDos = totalPoblacion.slice(0, 6).map((item, index) => ({

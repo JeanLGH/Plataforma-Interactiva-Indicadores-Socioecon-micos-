@@ -21,7 +21,7 @@ export default function AdminNavbar(props) {
 	
 
 	useEffect(() => {
-		// Obtener la última parte de la URL como brandText
+		// Obtener la Ãºltima parte de la URL como brandText
 		const pathnameSegments = location.pathname.split('/');
 		const lastSegment = pathnameSegments[pathnameSegments.length - 1];
 		setBrandText(capitalizeFirstLetter(lastSegment));

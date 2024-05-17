@@ -4,7 +4,6 @@ import { Box, Flex, Stack } from "@chakra-ui/react";
 import Brand from "../components/Brand";
 import Links from "../components/Links";
 import React from "react";
-import SidebarCard from "../components/SidebarCard";
 
 function SidebarContent({ routes }) {
   // SIDEBAR
@@ -16,13 +15,6 @@ function SidebarContent({ routes }) {
           <Links routes={routes} />
         </Box>
       </Stack>
-
-      <Box
-        mt='60px'
-        mb='40px'
-        borderRadius='30px'>
-        <SidebarCard />
-      </Box>
     </Flex>
   );
 }

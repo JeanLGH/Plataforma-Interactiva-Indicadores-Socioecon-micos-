@@ -1,4 +1,3 @@
-import React from "react";
 import { MdPerson, MdHome } from "react-icons/md";
 
 import MainDashboard from "./pages/admin/default";

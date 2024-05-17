@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
-  Box, 
+  Box,
+  Flex,
   Select,
-  Flex, 
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
 import Card from "../../../../components/card/Card.js";
-import { PyramidChart } from "../../../../variables/charts.js";
+import PyramidChart from "../../../../components/charts/PyramidChart.js";
 
 export default function WeeklyRevenue({ pyramidData, selectedMunicipio, handleMunicipioChange, ...rest }) {
   // Lista de municipios disponibles

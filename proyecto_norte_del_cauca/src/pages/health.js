@@ -16,7 +16,7 @@ const Salud = () => {
     useEffect(() => {
         const fetchTotalPoblacion = async () => {
             try {
-              const response = await fetch('http://localhost:3001/datos2022Poblacion');
+              const response = await fetch('http://localhost:3001/total2022Poblacion');
               if (!response.ok) {
                 throw new Error('Error al obtener los datos del servidor');
               }
@@ -49,7 +49,7 @@ const Salud = () => {
         },
         {
             icon: faSkullCrossbones,
-            title: '28.786',
+            title: totalPoblacion ? totalPoblacion[0].total_poblacion : 'Cargando...',
             description: 'Total de muertes',
             bg: '#921313',
         }, {
@@ -88,7 +88,7 @@ const Salud = () => {
                     </Row>
                     <Row>
                         Gráfica
-                        <Graphic totalPoblacion={totalPoblacion} />
+                       
                        
                     </Row>
                 </Col>

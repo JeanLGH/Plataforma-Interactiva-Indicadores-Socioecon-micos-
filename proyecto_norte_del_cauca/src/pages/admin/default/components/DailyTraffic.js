@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 
 // Chakra imports
 import { Box, Flex, Text, useColorModeValue } from "@chakra-ui/react";
+import BarChart from "../../../../components/charts/BarChart";
 
 // Custom components
 import Card from "../../../../components/card/Card.js";
@@ -34,7 +35,7 @@ export default function DailyTraffic(props) {
 
   const { ...rest } = props;
   const getBarData = barChartDataDailyTraffic(dataDb)
-  const getBartOptions = barChartOptionsDailyTraffic(dataDb, ["Santander De Quilichao", "Puerto Tejada", "Guachenée"]);
+  const getBartOptions = barChartOptionsDailyTraffic(dataDb, ["Santander De Quilichao", "Puerto Tejada", "GuachenÃ©e"]);
 
   console.log(getBarData)
   console.log(getBartOptions)
@@ -44,13 +45,13 @@ export default function DailyTraffic(props) {
     <Card align='center' direction='column' w='100%' {...rest}>
       <Flex justify='space-between' align='start' px='10px' pt='5px'>
         <Flex flexDirection='column' align='start' me='20px'>
-          <Flex align='end'>
+          <Flex w='100%'>
             <Text
-              color={textColor}
-              fontSize='30px'
-              fontWeight='500'
-              lineHeight='100%'>
-              Gráfica de Barra de {dataDb && dataDb.length > 0 ? Object.keys(dataDb[0])[1] : "Columna1"} por {dataDb && dataDb.length > 0 ? Object.keys(dataDb[0])[0] : "Columna2"}
+              me='auto'
+              color='secondaryGray.600'
+              fontSize='sm'
+              fontWeight='500'>
+                Barra de {dataDb && dataDb.length > 0 ? Object.keys(dataDb[0])[1] : "Columna1"} por {dataDb && dataDb.length > 0 ? Object.keys(dataDb[0])[0] : "Columna2"}
             </Text>
           </Flex>
         </Flex>

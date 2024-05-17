@@ -16,13 +16,10 @@ export default function Dashboard(props) {
 	// states and functions
 	const [fixed] = useState(false);
 	const [toggleSidebar, setToggleSidebar] = useState(false);
-
-
-	const handleToggleSidebar = () => {
-		setToggleSidebar(!toggleSidebar);
-	  };
 	// functions for changing the states from components
-
+	const getRoute = () => {
+		return window.location.pathname !== '/admin/full-screen-maps';
+	};
 	const getActiveRoute = (routes) => {
 		let activeRoute = 'Default Brand Text';
 		for (let i = 0; i < routes.length; i++) {
@@ -86,6 +83,30 @@ export default function Dashboard(props) {
 		}
 		return activeNavbar;
 	};
+	const getRoutes = (routes) => {
+		return routes.map((prop, key) => {
+			if (prop.layout === '/admin') {
+				if (prop.component) {
+					return (
+						<Route
+							key={key}
+							path={`${prop.layout}${prop.path}`}
+							element={<prop.component />}
+						/>
+					);
+				} else {
+					console.error(`Component for route "${prop.name}" is undefined.`);
+				}
+			}
+			if (prop.collapse) {
+				return getRoutes(prop.items);
+			}
+			if (prop.category) {
+				return getRoutes(prop.items);
+			}
+			return null;
+		});
+	};
 
 	document.documentElement.dir = 'ltr';
 	const { onOpen } = useDisclosure();
@@ -95,7 +116,11 @@ export default function Dashboard(props) {
 
 		<Box>
 			<Box>
-			<SidebarContext.Provider value={{ toggleSidebar, handleToggleSidebar }}>
+				<SidebarContext.Provider
+					value={{
+						toggleSidebar,
+						setToggleSidebar
+					}}>
 					<Sidebar routes={routes} display='none' {...rest} />
 					<Box
 						float='right'
@@ -115,27 +140,27 @@ export default function Dashboard(props) {
 								<Navbar
 									onOpen={onOpen}
 									logoText={'Horizon UI Dashboard PRO'}
-									brandText={getActiveRoute(routes)}
-									secondary={getActiveNavbar(routes)}
-									message={getActiveNavbarText(routes)}
+									brandText={getActiveRoute(routes)}  // Ruta activa
+									secondary={getActiveNavbar(routes)} // Estado de la barra de navegación
+									message={getActiveNavbarText(routes)} // Texto asociado a la barra de navegación
 									fixed={fixed}
 									{...rest}
 								/>
 							</Box>
 						</Portal>
 
-						
+						{getRoute() ? (
 							<Box mx='auto' p={{ base: '20px', md: '30px' }} pe='20px' minH='100vh' pt='50px'>
 								<Routes>
+									{getRoutes(routes)}
 									<Route path="/default" element={<Admin />} />
 									<Route path="/profile" element={<Profile />} />
 									<Route path="/demography" element={<Admin />} />
-
-								
+									<Route path="/health" element={<Admin />} />
+									<Route path="/education" element={<Admin />} />
 								</Routes>
-								
 							</Box>
-						
+						) : null}
 					</Box>
 				</SidebarContext.Provider>
 			</Box>

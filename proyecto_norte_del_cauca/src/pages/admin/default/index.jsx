@@ -55,7 +55,6 @@ export default function UserReports() {
           throw new Error("Error al obtener los datos del servidor");
         }
         const data = await response.json();
-        console.log(data)
         setPyramidData(data);
       } catch (error) {
         console.error("Error al obtener los datos de la pirámide poblacional:", error);
@@ -74,7 +73,6 @@ export default function UserReports() {
           throw new Error("Error al obtener los datos del servidor");
         }
         const data = await response.json();
-        console.log(data)
         setPyramidDataMunicipio(data);
         
       } catch (error) {

@@ -7,7 +7,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import Card from "../../../../components/card/Card.js";
-import LineChartGroup from  "../../../../variables/LineChartGroup.js";;
+import LineChartGroup from "../../../../components/charts/LineChartGroup.js";
 
 export default function TotalSpent(props) {
   const { ...rest } = props;
@@ -82,12 +82,13 @@ export default function TotalSpent(props) {
           >
             Proyección de Hogares
           </Text>
-          <Select value={selectedArea} onChange={handleAreaChange}>
+          
+        </Flex>
+        <Select value={selectedArea} onChange={handleAreaChange}>
             {areas.map(area => (
               <option key={area} value={area}>{area}</option>
             ))}
           </Select>
-        </Flex>
       </Flex>
       <Flex w='100%' flexDirection={{ base: "column", lg: "row" }}>
         <Box minH='260px' minW='100%' mt='auto'>

@@ -16,12 +16,11 @@ class PieChart extends React.Component {
       chartData: this.props.chartData,
       chartOptions: this.props.chartOptions,
     });
-    console.log("Componente BarChart montado.");
-    console.log("chartData inicial:", this.props.chartData);
-    console.log("chartOptions inicial:", this.props.chartOptions);
   }
 
   render() {
+    console.log("ChartData:", this.state.chartData);
+    console.log("ChartOptions:", this.state.chartOptions);
     return (
       <ReactApexChart
         options={this.state.chartOptions}

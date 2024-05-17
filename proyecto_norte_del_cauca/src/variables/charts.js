@@ -1,6 +1,6 @@
 // Daily Traffic Dashboards Default
-import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid, ResponsiveContainer, Line, LineChart } from "recharts";
-import { sumBy } from "lodash";
+import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid, ResponsiveContainer } from "recharts";
+import { sumBy } from "lodash"; 
 const municipiosOfInterest = ['Santander De Quilichao', 'Puerto Tejada', 'Guachené'];
 const removeDuplicates = (arr, prop) => arr.filter((obj, index) => arr.map(mapObj => mapObj[prop]).indexOf(obj[prop]) === index);
 const generateColors = (count) => {
@@ -21,12 +21,12 @@ const generateColors = (count) => {
   return colors;
 };
 export const barChartDataDailyTraffic = (dataDb) => {
-  
+  console.log("Datos de la base de datos:", dataDb);
   const filteredData = dataDb ? removeDuplicates(dataDb.filter((item) => municipiosOfInterest.includes(item.MunicipioAS)), 'Poblacion_DANE') : [];
 
   // Usar la población de la base de datos como los datos para la gráfica
   const datos = filteredData.map((item) => item.Poblacion_DANE);
-  
+  console.log("Datos de población después de filtrar:", datos);
   const datap = datos
   console.log(datap)
   return [
@@ -39,22 +39,11 @@ export const barChartDataDailyTraffic = (dataDb) => {
 };
 
 
-
-
-
-
-
-
-
-
-
-export const PyramidChart = ({ data, selectedMunicipio }) => {
-  // Filtrar los datos por el municipio seleccionado
-  const filteredData = selectedMunicipio ? data.filter(entry => entry.municipio === selectedMunicipio) : data;
-
+export const PyramidChart = ({ data }) => {
+  console.log(data)
   return (
     <ResponsiveContainer width="100%" height="100%">
-      <BarChart data={filteredData} layout="vertical">
+      <BarChart data={data} layout="vertical">
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis type="number" />
         <YAxis type="category" dataKey="grupo_edad" />
@@ -302,6 +291,7 @@ export const getPieChartOptions = (dataDb) => {
   // Extraer los nombres de los municipios del array dataDb
   const filteredData = dataDb ? removeDuplicates(dataDb.filter((item) => municipiosOfInterest.includes(item.MunicipioAS)), 'MunicipioAS') : [];
   const colors = generateColors(municipiosOfInterest.length); // Generar colores aleatorios para cada municipio
+  console.log(filteredData);
   const labels = filteredData.map((item) => item.MunicipioAS);
 
   return {
